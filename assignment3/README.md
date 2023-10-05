@@ -37,7 +37,6 @@ To use the filters, call the functions with the image path as argument:
 
 ```
 python3 -m in3110_instapy <arguments>
-
 ```
 
 where `<arguments>` are:
