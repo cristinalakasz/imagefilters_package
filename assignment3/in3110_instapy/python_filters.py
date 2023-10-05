@@ -49,19 +49,19 @@ def python_color2sepia(image: np.array) -> np.array:
     for i in range(len(image)):
         for j in range(len(image[0])):
             # applying the sepia matrix
-            sepia_image[i, j, 0] = sepia_matrix[0][0]*image[i, j, 0] + \
+            val0 = sepia_matrix[0][0]*image[i, j, 0] + \
                 sepia_matrix[0][1]*image[i, j, 1] + \
                 sepia_matrix[0][2]*image[i, j, 2]
-            sepia_image[i, j, 1] = sepia_matrix[1][0]*image[i, j, 0] + \
+            val1 = sepia_matrix[1][0]*image[i, j, 0] + \
                 sepia_matrix[1][1]*image[i, j, 1] + \
                 sepia_matrix[1][2]*image[i, j, 2]
-            sepia_image[i, j, 2] = sepia_matrix[2][0]*image[i, j, 0] + \
+            val2 = sepia_matrix[2][0]*image[i, j, 0] + \
                 sepia_matrix[2][1]*image[i, j, 1] + \
                 sepia_matrix[2][2]*image[i, j, 2]
             # set the maximum value to 255 for each channel
-            sepia_image[i, j, 0] = min(sepia_image[i, j, 0], 255)
-            sepia_image[i, j, 1] = min(sepia_image[i, j, 1], 255)
-            sepia_image[i, j, 2] = min(sepia_image[i, j, 2], 255)
+            sepia_image[i, j, 0] = min(val0, 255)
+            sepia_image[i, j, 1] = min(val1, 255)
+            sepia_image[i, j, 2] = min(val2, 255)
 
     # set the image to the right type
     sepia_image = sepia_image.astype("uint8")

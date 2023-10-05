@@ -57,6 +57,8 @@ def test_color2sepia(image):
         expected_value = sepia_matrix[0][0]*image[i, j, 0] + \
             sepia_matrix[0][1]*image[i, j, 1] + \
             sepia_matrix[0][2]*image[i, j, 2]
+        if expected_value > 255:
+            expected_value = 255
         assert sepia_image[i, j, 0] == expected_value.astype(
             "uint8"), f"The r,g,b values are not correct at pixel ({i}, {j})."
         expected_value = sepia_matrix[1][0]*image[i, j, 0] + \

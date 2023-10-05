@@ -57,24 +57,24 @@ def numpy_color2sepia(image: np.array, k: float = 1) -> np.array:
     sepia_matrix = np.array(sepia_matrix)
 
     # build the tuneable sepia matrix by scaling the original sepia matrix with matrix k
-    #identity = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
-    #sepia_matrix = identity * (1-k) + sepia_matrix * k
-    sepia_matrix = [
-        [0.393 + 0.607*(1 - k), 0.769 - 0.769 * (1-k), 0.189 - 0.189 * (1-k)],
-        [0.349 - 0.349*(1-k), 0.686 + 0.314 * (1-k), 0.168 - 0.168 * (1-k)],
-        [0.272 - 0.272 * (1-k), 0.534 - 0.534*(1-k), 0.131 + 0.869*(1-k)],
-    ]
+    identity = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
+    sepia_matrix = identity * (1-k) + sepia_matrix * k
+    #sepia_matrix = [
+    #    [0.393 + 0.607*(1 - k), 0.769 - 0.769 * (1-k), 0.189 - 0.189 * (1-k)],
+    #    [0.349 - 0.349*(1-k), 0.686 + 0.314 * (1-k), 0.168 - 0.168 * (1-k)],
+    #    [0.272 - 0.272 * (1-k), 0.534 - 0.534*(1-k), 0.131 + 0.869*(1-k)],
+    #]
 
     # HINT: For version without adaptive sepia filter, use the same matrix as in the pure python implementation
     # use Einstein sum to apply pixel transform matrix
     # Apply the matrix filter
     sepia_image = np.einsum("ijk,lk->ijl", image, sepia_matrix)
 
-    # Convert to the right type
-    sepia_image = sepia_image.astype("uint8")
-
     # Check which entries have a value greater than 255 and set it to 255 since we can not display values bigger than 255
     sepia_image[np.where(sepia_image > 255)] = 255
+
+    # Convert to the right type
+    sepia_image = sepia_image.astype("uint8")
 
     # Return image
     return sepia_image
